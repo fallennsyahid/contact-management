@@ -8,6 +8,8 @@ import {
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/config.js";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const AuthContext = createContext();
 
@@ -46,9 +48,11 @@ export const AuthProvider = ({ children }) => {
 
       setUser({ ...userCredential.user, displayName: fullName });
 
+      toast.success("Selamat Datang 😉");
       navigate("/dashboard");
     } catch (err) {
       setError(err.message);
+      toast.error("Login gagal: " + err.message);
     } finally {
       setLoading(false);
     }
@@ -59,24 +63,41 @@ export const AuthProvider = ({ children }) => {
       setError(null);
       setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Selamat Datang 😉");
       navigate("/dashboard");
     } catch (err) {
       setError(err.message);
+      toast.error("Login gagal: " + err.message);
     } finally {
       setLoading(false);
     }
   };
 
   const logout = async () => {
-    try {
-      setError(null);
-      setLoading(true);
-      await signOut(auth);
-      navigate("/");
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+    const result = await Swal.fire({
+      title: "Yakin ingin logout?",
+      text: "Kamu akan keluar dari akun ini.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, logout",
+      cancelButtonText: "Batal",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        setError(null);
+        setLoading(true);
+        await signOut(auth);
+        toast.success("Logout Berhasil 👋");
+        navigate("/");
+      } catch (err) {
+        setError(err.message);
+        toast.error("Logout gagal: " + err.message);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 

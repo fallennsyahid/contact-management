@@ -8,10 +8,13 @@ import PrivateRoute from "./router/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import CreateContact from "./pages/CreateContact";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
+      <Toaster position="top-right" reverseOrder={false} />
+
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
