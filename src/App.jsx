@@ -7,6 +7,7 @@ import RegisterPage from "./pages/Register";
 import PrivateRoute from "./router/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import CreateContact from "./pages/CreateContact";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/create-contact" element={<CreateContact />} />
 
         <Route
           path="/dashboard"
