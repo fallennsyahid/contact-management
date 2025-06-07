@@ -31,7 +31,7 @@ const AddressListCard = () => {
           <span>USA</span>
         </p>
         <p className="flex items-center">
-          <i className="fa-solid fa-paper-plane text-gray-500 w-6"></i>
+          <i className="fa-solid fa-envelopes-bulk text-gray-500 w-6"></i>
           <span className="font-medium w-24">Postal Code:</span>
           <span>12345</span>
         </p>
