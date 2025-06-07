@@ -22,7 +22,7 @@ const DetailContact = () => {
           </h1>
         </div>
 
-        <div className="bg-gray-800 bg-opacity-80 rounded-xl shadow-lg border border-gray-700 overflow-hidden max-w-2xl mx-auto">
+        <div className="bg-gray-800/80 rounded-xl shadow-lg border border-gray-700 overflow-hidden max-w-2xl mx-auto">
           <div className="p-8">
             <div className="mb-8 text-center">
               <div className="w-20 h-20 bg-gradient rounded-full mx-auto flex items-center justify-center mb-4 shadow-lg">
@@ -35,7 +35,7 @@ const DetailContact = () => {
             {/* Contact Information */}
             <div className="space-y-5 mb-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="bg-gray-700 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:backdrop-opacity-70">
+                <div className="bg-gray-700/50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-gray-700/70">
                   <div className="flex items-center mb-2">
                     <i className="fa-solid fa-user-tag text-blue-400 mr-2"></i>
                     <h1 className="text-sm font-medium text-gray-300">
@@ -44,7 +44,7 @@ const DetailContact = () => {
                   </div>
                   <p className="text-white text-lg ml-6">John</p>
                 </div>
-                <div className="bg-gray-700 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:backdrop-opacity-70">
+                <div className="bg-gray-700/50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-gray-700/70">
                   <div className="flex items-center mb-2">
                     <i className="fa-solid fa-user-tag text-blue-400 mr-2"></i>
                     <h1 className="text-sm font-medium text-gray-300">
@@ -55,7 +55,7 @@ const DetailContact = () => {
                 </div>
               </div>
 
-              <div className="bg-gray-700 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:backdrop-opacity-70">
+              <div className="bg-gray-700/50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-gray-700/70">
                 <div className="flex items-center mb-2">
                   <i className="fa-solid fa-envelope text-blue-400 mr-2"></i>
                   <h1 className="text-sm font-medium text-gray-300">Email</h1>
@@ -63,7 +63,7 @@ const DetailContact = () => {
                 <p className="text-white text-lg ml-6">john.doe@example.com</p>
               </div>
 
-              <div className="bg-gray-700 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:backdrop-opacity-70">
+              <div className="bg-gray-700/50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-gray-700/70">
                 <div className="flex items-center mb-2">
                   <i className="fa-solid fa-phone text-blue-400 mr-2"></i>
                   <h1 className="text-sm font-medium text-gray-300">Phone</h1>

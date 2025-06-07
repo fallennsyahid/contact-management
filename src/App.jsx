@@ -11,6 +11,7 @@ import CreateContact from "./pages/CreateContact";
 import { Toaster } from "react-hot-toast";
 import DetailContact from "./pages/DetailContact";
 import EditContact from "./pages/EditContact";
+import AddAddress from "./pages/AddAddress";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/create-contact" element={<CreateContact />} />
         <Route path="/detail-contact" element={<DetailContact />} />
         <Route path="/edit-contact" element={<EditContact />} />
+        <Route path="/add-address" element={<AddAddress />} />
 
         <Route
           path="/dashboard"

@@ -14,7 +14,7 @@ export default function LoginPage() {
 
   return (
     <div className="bg-gradient-to-br from-gray-800 to-gray-800 flex justify-center items-center min-h-screen p-4">
-      <div className="bg-gray-800 bg-opacity-80 p-8 rounded-xl shadow-xl border border-gray-700 backdrop-blur-sm w-full max-w-md">
+      <div className="bg-gray-800/80 p-8 rounded-xl shadow-xl border border-gray-700 backdrop-blur-sm w-full max-w-md">
         <div className="text-center mb-8">
           <div className="inline-block p-3 bg-gradient rounded-full mb-4">
             <i className="fa-solid fa-address-book text-white text-3xl"></i>
@@ -42,7 +42,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 duration-200 transition-all"
+                className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 duration-200 transition-all"
               />
             </div>
           </div>
@@ -65,7 +65,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 duration-200 transition-all"
+                className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 duration-200 transition-all"
               />
             </div>
           </div>

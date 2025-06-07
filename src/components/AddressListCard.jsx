@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const AddressListCard = () => {
   return (
-    <div className="bg-gray-700 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
+    <div className="bg-gray-700/50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
       <div className="flex items-center mb-3">
         <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3 shadow-md">
           <i className="fa-solid fa-location-dot text-white"></i>

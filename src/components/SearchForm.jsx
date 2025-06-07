@@ -18,7 +18,7 @@ export default function SearchForm() {
   }, [isVisible]);
 
   return (
-    <div className="bg-gray-800 bg-opacity-80 rounded-xl shadow-lg border border-gray-700 p-6 mb-8">
+    <div className="bg-gray-800/80 rounded-xl shadow-lg border border-gray-700 p-6 mb-8">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center">
           <i className="fa-solid fa-search text-blue-400 text-2xl mr-3"></i>
@@ -66,7 +66,7 @@ export default function SearchForm() {
                   id="search_name"
                   name="search_name"
                   placeholder="Search by name"
-                  className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                  className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 />
               </div>
             </div>
@@ -87,7 +87,7 @@ export default function SearchForm() {
                   id="search_email"
                   name="search_email"
                   placeholder="Search by email"
-                  className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                  className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 />
               </div>
             </div>
@@ -108,7 +108,7 @@ export default function SearchForm() {
                   id="search_phone"
                   name="search_phone"
                   placeholder="Search by name"
-                  className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                  className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 />
               </div>
             </div>

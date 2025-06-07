@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function ContactListCard() {
   return (
-    <div className="bg-gray-800 bg-opacity-80 rounded-xl shadow-lg border border-gray-700 overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
+    <div className="bg-gray-800/80 rounded-xl shadow-lg border border-gray-700 overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
       <div className="p-6">
         <Link
           to="/detail-contact"
