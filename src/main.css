@@ -5,3 +5,9 @@ body {
 .bg-gradient {
   background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
 }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
