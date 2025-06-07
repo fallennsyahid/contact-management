@@ -4,7 +4,10 @@ export default function ContactListCard() {
   return (
     <div className="bg-gray-800 bg-opacity-80 rounded-xl shadow-lg border border-gray-700 overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
       <div className="p-6">
-        <Link className="block cursor-pointer hover:bg-gray-700 rounded-lg transition-all duration-200 p-3">
+        <Link
+          to="/detail-contact"
+          className="block cursor-pointer hover:bg-gray-700 rounded-lg transition-all duration-200 p-3"
+        >
           <div className="flex items-center mb-3">
             <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3 shadow-md">
               <i className="fa-solid fa-user text-white"></i>

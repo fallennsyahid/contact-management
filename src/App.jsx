@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import CreateContact from "./pages/CreateContact";
 import { Toaster } from "react-hot-toast";
+import DetailContact from "./pages/DetailContact";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/create-contact" element={<CreateContact />} />
+        <Route path="/detail-contact" element={<DetailContact />} />
 
         <Route
           path="/dashboard"
