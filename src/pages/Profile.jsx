@@ -1,7 +1,13 @@
+import { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useAuth } from "../stores/Auth";
 
 export default function Profile() {
+  const { user } = useAuth();
+
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   return (
     <>
       <Navbar />
@@ -12,7 +18,6 @@ export default function Profile() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Form 1: Edit Name */}
           <div className="bg-gray-800/80 border border-gray-700 rounded-xl shadow-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1">
             <div className="p-6">
               <div className="flex items-center mb-4">
@@ -24,6 +29,7 @@ export default function Profile() {
                 </h2>
               </div>
 
+              {/* Form 1: Edit Name */}
               <form>
                 <div className="mb-5">
                   <label
@@ -41,7 +47,7 @@ export default function Profile() {
                       name="name"
                       id="name"
                       placeholder="Enter your full name"
-                      value="Jhon Doe"
+                      value={user.displayName}
                       required
                       className="w-full pl-10 pr-3 py-2 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                     />
@@ -84,8 +90,18 @@ export default function Profile() {
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-auto">
                       <i className="fa-solid fa-lock text-gray-500"></i>
                     </div>
+                    <div
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                      onClick={() => setShowNewPassword((prev) => !prev)}
+                    >
+                      <i
+                        className={`fas ${
+                          showNewPassword ? "fa-eye-slash" : "fa-eye"
+                        } text-gray-500`}
+                      ></i>
+                    </div>
                     <input
-                      type="text"
+                      type={showNewPassword ? "text" : "password"}
                       name="new_password"
                       id="new_password"
                       placeholder="Enter your new password"
@@ -106,8 +122,18 @@ export default function Profile() {
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-auto">
                       <i className="fa-solid fa-check-double text-gray-500"></i>
                     </div>
+                    <div
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                      onClick={() => setShowConfirmPassword((prev) => !prev)}
+                    >
+                      <i
+                        className={`fas ${
+                          showConfirmPassword ? "fa-eye-slash" : "fa-eye"
+                        } text-gray-500`}
+                      ></i>
+                    </div>
                     <input
-                      type="text"
+                      type={showConfirmPassword ? "text" : "password"}
                       name="confirm_password"
                       id="confirm_password"
                       placeholder="Confirm your new password"

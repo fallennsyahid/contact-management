@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../stores/Auth";
 
 export default function Navbar() {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <header className="bg-gradient shadow-lg">
@@ -17,24 +17,38 @@ export default function Navbar() {
         </Link>
         <nav>
           <ul className="flex space-x-6">
-            <li>
-              <Link
-                to="/profile"
-                className="text-gray-100 hover:text-white flex items-center transition-colors duration-200"
-              >
-                <i className="fas fa-user-circle mr-2"></i>
-                <span>Profile</span>
-              </Link>
-            </li>
-            <li>
-              <button
-                onClick={logout}
-                className="text-gray-100 hover:text-white flex items-center transition-colors duration-200 cursor-pointer"
-              >
-                <i className="fas fa-sign-out-alt mr-2"></i>
-                <span>Logout</span>
-              </button>
-            </li>
+            {user ? (
+              <>
+                <li>
+                  <Link
+                    to="/profile"
+                    className="text-gray-100 hover:text-white flex items-center transition-colors duration-200"
+                  >
+                    <i className="fas fa-user-circle mr-2"></i>
+                    <span>Profile</span>
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={logout}
+                    className="text-gray-100 hover:text-white flex items-center transition-colors duration-200 cursor-pointer"
+                  >
+                    <i className="fas fa-sign-out-alt mr-2"></i>
+                    <span>Logout</span>
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link
+                  to="/login"
+                  className="text-gray-100 hover:text-white flex items-center transition-colors duration-200"
+                >
+                  <i className="fas fa-user-circle mr-2"></i>
+                  <span>Login</span>
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>

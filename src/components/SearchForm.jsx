@@ -44,6 +44,10 @@ export default function SearchForm() {
         ref={searchFormRef}
         className="mt-4"
         style={{
+          maxHeight: "0px",
+          opacity: 0,
+          marginTop: 0,
+          overflow: "hidden",
           transition:
             "max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin 0.3s ease-in-out",
         }}
