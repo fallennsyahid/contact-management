@@ -1,8 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../config/config";
+import toast from "react-hot-toast";
 
 const CreateContact = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addDoc(collection(db, "contacts"), form);
+      toast.success("Add contact successfully");
+      navigate("/dashboard");
+    } catch (err) {
+      toast.error("Failed to save contact " + err);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -21,7 +48,7 @@ const CreateContact = () => {
 
         <div className="bg-gray-800/80 rounded-xl shadow-lg border border-gray-700 overflow-hidden max-w-2xl mx-auto">
           <div className="p-8">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                 <div>
                   <label
@@ -38,6 +65,8 @@ const CreateContact = () => {
                       type="text"
                       id="first_name"
                       name="first_name"
+                      value={form.first_name}
+                      onChange={handleChange}
                       placeholder="Enter your first name"
                       required
                       className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
@@ -59,6 +88,8 @@ const CreateContact = () => {
                       type="text"
                       id="last_name"
                       name="last_name"
+                      value={form.last_name}
+                      onChange={handleChange}
                       placeholder="Enter your last name"
                       required
                       className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
@@ -82,6 +113,8 @@ const CreateContact = () => {
                     type="email"
                     id="email"
                     name="email"
+                    value={form.email}
+                    onChange={handleChange}
                     placeholder="Enter your email"
                     required
                     className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
@@ -104,6 +137,8 @@ const CreateContact = () => {
                     type="phone"
                     id="phone"
                     name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
                     placeholder="Enter your phone number"
                     required
                     className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"

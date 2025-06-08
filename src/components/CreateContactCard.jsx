@@ -1,10 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useAuth } from "../stores/Auth";
 
-export default function CreateContactCard({ isLoggedIn }) {
+export default function CreateContactCard() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const handleClick = () => {
-    if (!isLoggedIn) {
+    if (!user) {
       Swal.fire({
         icon: "warning",
         title: "Oops..",

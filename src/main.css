@@ -12,27 +12,35 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .loader {
   width: 15px;
   aspect-ratio: 1;
   border-radius: 50%;
-  animation: l5 1s infinite linear alternate;
+  animation: loader 1s infinite linear alternate;
+  -webkit-animation: loader 1s infinite linear alternate;
 }
-@keyframes l5 {
+@keyframes loader {
   0% {
-    box-shadow: 20px 0 #000, -20px 0 #0002;
-    background: #000;
+    box-shadow: 20px 0 #38bdf8, -20px 0 #60a5fa;
+    background: #38bdf8;
   }
   33% {
-    box-shadow: 20px 0 #000, -20px 0 #0002;
-    background: #0002;
+    box-shadow: 20px 0 #38bdf8, -20px 0 #60a5fa;
+    background: #60a5fa;
   }
   66% {
-    box-shadow: 20px 0 #0002, -20px 0 #000;
-    background: #0002;
+    box-shadow: 20px 0 #60a5fa, -20px 0 #38bdf8;
+    background: #60a5fa;
   }
   100% {
-    box-shadow: 20px 0 #0002, -20px 0 #000;
-    background: #000;
+    box-shadow: 20px 0 #60a5fa, -20px 0 #38bdf8;
+    background: #38bdf8;
   }
 }

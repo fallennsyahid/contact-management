@@ -1,9 +1,27 @@
+import { useEffect, useState } from "react";
 import ContactListCard from "../components/ContactListCard";
 import CreateContactCard from "../components/CreateContactCard";
 import Navbar from "../components/Navbar";
 import SearchForm from "../components/SearchForm";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../config/config";
 
 export default function Dashboard() {
+  const [contacts, setContacts] = useState([]);
+
+  const fetchContacts = async () => {
+    const querySnapshot = await getDocs(collection(db, "contacts"));
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setContacts(data);
+  };
+
+  useEffect(() => {
+    fetchContacts();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -15,10 +33,9 @@ export default function Dashboard() {
         <SearchForm />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <CreateContactCard />
-          <ContactListCard />
-          <ContactListCard />
-          <ContactListCard />
-          <ContactListCard />
+          {contacts.map((contact) => (
+            <ContactListCard key={contact.id} contact={contact} />
+          ))}
         </div>
       </main>
     </>
