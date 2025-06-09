@@ -1,6 +1,33 @@
 import { Link } from "react-router-dom";
+import Button from "./Button";
+import Swal from "sweetalert2";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../config/config";
+import toast from "react-hot-toast";
 
 export default function ContactListCard({ contact }) {
+  const handleDelete = async () => {
+    const confirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#e3342f",
+      cancelButtonColor: "#6c757d",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (confirm.isConfirmed) {
+      try {
+        await deleteDoc(doc(db, "contacts", contact.id));
+        toast.success("Delete contact successfully");
+      } catch (error) {
+        console.error("Error deleting contact: " + error);
+        toast.error("Error!, Failed to delete contact." + error);
+      }
+    }
+  };
+
   return (
     <div className="bg-gray-800/80 rounded-xl shadow-lg border border-gray-700 overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
       <div className="p-6">
@@ -46,9 +73,12 @@ export default function ContactListCard({ contact }) {
           >
             <i className="fa-solid fa-edit mr-2"></i> Edit
           </Link>
-          <button className="px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md cursor-pointer flex items-center">
-            <i className="fa-solid fa-trash-alt mr-2"></i> Delete
-          </button>
+          <Button
+            onClick={handleDelete}
+            icon="fa-trash-alt"
+            text="Delete"
+            btnColor="bg-gradient-to-r from-red-600 to-red-500"
+          />
         </div>
       </div>
     </div>

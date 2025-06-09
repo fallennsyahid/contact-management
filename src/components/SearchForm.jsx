@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Button from "./Button";
 
 export default function SearchForm() {
   const [isVisible, setIsVisible] = useState(false);
@@ -117,13 +118,13 @@ export default function SearchForm() {
               </div>
             </div>
           </div>
-          <div className="mt-5 text-right">
-            <button
+          <div className="mt-5 flex justify-end">
+            <Button
               type="submit"
-              className="px-5 py-3 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-lg transform hover:-translate-y-0.5 cursor-pointer"
-            >
-              <i className="fa-solid fa-search"></i> Search
-            </button>
+              icon="fa-search"
+              text="Search"
+              btnColor="bg-gradient"
+            />
           </div>
         </form>
       </div>

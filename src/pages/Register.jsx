@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../stores/Auth";
 import { useState } from "react";
+import PasswordInput from "../components/PasswordInput";
 
 export default function RegisterPage() {
   const { register } = useAuth();
@@ -80,53 +81,27 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-300 font-medium text-sm mb-2"
-            >
-              Password
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-auto">
-                <i className="fas fa-lock text-gray-500"></i>
-              </div>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Create a password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 duration-200 transition-all"
-              />
-            </div>
-          </div>
+          <PasswordInput
+            label="Password"
+            name="password"
+            id="password"
+            iconLeft="fa-lock"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            withToggle
+          />
 
-          <div className="mb-4">
-            <label
-              htmlFor="confirm-password"
-              className="block text-gray-300 font-medium text-sm mb-2"
-            >
-              Confirm Password
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-auto">
-                <i className="fas fa-check-double text-gray-500"></i>
-              </div>
-              <input
-                type="password"
-                name="confirm-password"
-                id="confirm-password"
-                placeholder="Confirm your password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 duration-200 transition-all"
-              />
-            </div>
-          </div>
+          <PasswordInput
+            label="Confirm Password"
+            name="confirm-password"
+            id="confirm-password"
+            iconLeft="fa-check-double"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm your password"
+            withToggle
+          />
 
           <div className="mb-6">
             <button
@@ -140,7 +115,7 @@ export default function RegisterPage() {
           <div className="text-center text-sm text-gray-500 space-x-2">
             {"Already have an account? "}
             <Link
-              to="/"
+              to="/login"
               className="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200"
             >
               Sign In

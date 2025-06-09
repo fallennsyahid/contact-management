@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../stores/Auth";
 import { useState } from "react";
+import PasswordInput from "../components/PasswordInput";
 
 export default function LoginPage() {
   const { login, error } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,28 +49,16 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="mb-5">
-            <label
-              htmlFor="password"
-              className="block text-gray-300 font-medium text-sm mb-2"
-            >
-              Password
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-auto">
-                <i className="fas fa-lock text-gray-500"></i>
-              </div>
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter your name.."
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 duration-200 transition-all"
-              />
-            </div>
-          </div>
+          <PasswordInput
+            label="Password"
+            name="password"
+            id="password"
+            iconLeft="fa-lock"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            withToggle
+          />
 
           <div className="mb-6">
             <button

@@ -3,24 +3,36 @@ import ContactListCard from "../components/ContactListCard";
 import CreateContactCard from "../components/CreateContactCard";
 import Navbar from "../components/Navbar";
 import SearchForm from "../components/SearchForm";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../config/config";
 
 export default function Dashboard() {
   const [contacts, setContacts] = useState([]);
 
-  const fetchContacts = async () => {
-    const querySnapshot = await getDocs(collection(db, "contacts"));
-    const data = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    setContacts(data);
-  };
+  // const fetchContacts = async () => {
+  //   const querySnapshot = await getDocs(collection(db, "contacts"));
+  //   const data = querySnapshot.docs.map((doc) => ({
+  //     id: doc.id,
+  //     ...doc.data(),
+  //   }));
+  //   setContacts(data);
+  // };
+
+  // useEffect(() => {
+  //   fetchContacts();
+  // }, []);
 
   useEffect(() => {
-    fetchContacts();
-  }, []);
+    const unsubscribe = onSnapshot(collection(db, "contacts"), (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setContacts(data);
+    });
+
+    return () => unsubscribe();
+  });
 
   return (
     <>

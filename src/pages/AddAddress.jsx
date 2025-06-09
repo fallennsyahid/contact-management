@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import Button from "../components/Button";
 
 const AddAddress = () => {
   return (
@@ -163,12 +164,12 @@ const AddAddress = () => {
                 >
                   <i className="fas fa-times mr-2"></i> Cancel
                 </Link>
-                <button
+                <Button
                   type="submit"
-                  className="px-5 py-3 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-lg transform hover:-translate-y-0.5 flex items-center cursor-pointer"
-                >
-                  <i class="fas fa-plus-circle mr-2"></i> Add Address
-                </button>
+                  icon="fa-plus-circle"
+                  text="Add Address"
+                  btnColor="bg-gradient"
+                />
               </div>
             </form>
           </div>

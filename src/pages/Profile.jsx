@@ -2,12 +2,14 @@ import { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useAuth } from "../stores/Auth";
+import PasswordInput from "../components/PasswordInput";
 
 export default function Profile() {
   const { user } = useAuth();
 
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPasseword] = useState("");
+
   return (
     <>
       <Navbar />
@@ -79,39 +81,29 @@ export default function Profile() {
               </div>
 
               <form>
-                <div className="mb-5">
-                  <label
-                    htmlFor="new_password"
-                    className="block text-gray-300 text-sm font-medium mb-2"
-                  >
-                    New Password
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-auto">
-                      <i className="fa-solid fa-lock text-gray-500"></i>
-                    </div>
-                    <div
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-                      onClick={() => setShowNewPassword((prev) => !prev)}
-                    >
-                      <i
-                        className={`fas ${
-                          showNewPassword ? "fa-eye-slash" : "fa-eye"
-                        } text-gray-500`}
-                      ></i>
-                    </div>
-                    <input
-                      type={showNewPassword ? "text" : "password"}
-                      name="new_password"
-                      id="new_password"
-                      placeholder="Enter your new password"
-                      required
-                      className="w-full pl-10 pr-3 py-2 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                    />
-                  </div>
-                </div>
+                <PasswordInput
+                  label="New Password"
+                  name="new_password"
+                  id="new_password"
+                  iconLeft="fa-lock"
+                  placeholder="Enter your a new password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  withToggle
+                />
 
-                <div className="mb-5">
+                <PasswordInput
+                  label="Confrim New Password"
+                  name="confirm_password"
+                  id="confirm_password"
+                  iconLeft="fa-check-double"
+                  placeholder="Confirm your a new password"
+                  value={confirmNewPassword}
+                  onChange={(e) => setConfirmNewPasseword(e.target.value)}
+                  withToggle
+                />
+
+                {/* <div className="mb-5">
                   <label
                     htmlFor="confirm_password"
                     className="block text-gray-300 text-sm font-medium mb-2"
@@ -141,7 +133,7 @@ export default function Profile() {
                       className="w-full pl-10 pr-3 py-2 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                     />
                   </div>
-                </div>
+                </div> */}
 
                 <div className="mb-5">
                   <button
