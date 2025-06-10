@@ -9,19 +9,6 @@ import { db } from "../config/config";
 export default function Dashboard() {
   const [contacts, setContacts] = useState([]);
 
-  // const fetchContacts = async () => {
-  //   const querySnapshot = await getDocs(collection(db, "contacts"));
-  //   const data = querySnapshot.docs.map((doc) => ({
-  //     id: doc.id,
-  //     ...doc.data(),
-  //   }));
-  //   setContacts(data);
-  // };
-
-  // useEffect(() => {
-  //   fetchContacts();
-  // }, []);
-
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "contacts"), (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
@@ -43,7 +30,7 @@ export default function Dashboard() {
           <h1 className="text-2xl font-bold text-white">My Contacts</h1>
         </div>
         <SearchForm />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
           <CreateContactCard />
           {contacts.map((contact) => (
             <ContactListCard key={contact.id} contact={contact} />

@@ -1,10 +1,45 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import AddAddressCard from "../components/AddAddressCard";
 import AddressListCard from "../components/AddressListCard";
+import { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../config/config";
+import toast from "react-hot-toast";
+import Loading from "../components/Loading";
 
 const DetailContact = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [contact, setContact] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchContact = async () => {
+      try {
+        const docRef = doc(db, "contacts", id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setContact(docSnap.data());
+        } else {
+          toast.error("Contact not found");
+          navigate("/dashboard");
+        }
+      } catch (err) {
+        toast.error("Failed to open contact");
+        console.error("Failde to fetch contact: " + err);
+        navigate("/dashboard");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchContact();
+  }, [id, navigate]);
+
+  if (loading) return <Loading />;
+  if (!contact) return null;
+
   return (
     <>
       <Navbar />
@@ -28,7 +63,9 @@ const DetailContact = () => {
               <div className="w-20 h-20 bg-gradient rounded-full mx-auto flex items-center justify-center mb-4 shadow-lg">
                 <i className="fa-solid fa-user text-3xl text-white"></i>
               </div>
-              <h1 className="text-white text-2xl font-bold mb-2">John Doe</h1>
+              <h1 className="text-white text-2xl font-bold mb-2">
+                {contact.first_name} {contact.last_name}
+              </h1>
               <div className="w-24 h-1 bg-gradient mx-auto rounded-full"></div>
             </div>
 
@@ -42,7 +79,9 @@ const DetailContact = () => {
                       First Name
                     </h1>
                   </div>
-                  <p className="text-white text-lg ml-6">John</p>
+                  <p className="text-white text-lg ml-6">
+                    {contact.first_name}
+                  </p>
                 </div>
                 <div className="bg-gray-700/50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-gray-700/70">
                   <div className="flex items-center mb-2">
@@ -51,7 +90,7 @@ const DetailContact = () => {
                       Last Name
                     </h1>
                   </div>
-                  <p className="text-white text-lg ml-6">Doe</p>
+                  <p className="text-white text-lg ml-6">{contact.last_name}</p>
                 </div>
               </div>
 
@@ -60,7 +99,7 @@ const DetailContact = () => {
                   <i className="fa-solid fa-envelope text-blue-400 mr-2"></i>
                   <h1 className="text-sm font-medium text-gray-300">Email</h1>
                 </div>
-                <p className="text-white text-lg ml-6">john.doe@example.com</p>
+                <p className="text-white text-lg ml-6">{contact.email}</p>
               </div>
 
               <div className="bg-gray-700/50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-gray-700/70">
@@ -68,7 +107,7 @@ const DetailContact = () => {
                   <i className="fa-solid fa-phone text-blue-400 mr-2"></i>
                   <h1 className="text-sm font-medium text-gray-300">Phone</h1>
                 </div>
-                <p className="text-white text-lg ml-6">+62 123456789</p>
+                <p className="text-white text-lg ml-6">{contact.phone}</p>
               </div>
             </div>
 

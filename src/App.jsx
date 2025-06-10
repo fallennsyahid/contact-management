@@ -37,8 +37,8 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-contact" element={<CreateContact />} />
-          <Route path="/detail-contact" element={<DetailContact />} />
-          <Route path="/edit-contact" element={<EditContact />} />
+          <Route path="/detail-contact/:id" element={<DetailContact />} />
+          <Route path="/edit-contact/:id" element={<EditContact />} />
           <Route path="/add-address" element={<AddAddress />} />
           <Route path="/edit-address" element={<EditAddress />} />
         </Route>

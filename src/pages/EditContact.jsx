@@ -1,8 +1,72 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useEffect, useState } from "react";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../config/config";
+import toast from "react-hot-toast";
+import Loading from "../components/Loading";
 
 const EditContact = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [contact, setContact] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+  });
+
+  useEffect(() => {
+    const fetchContact = async () => {
+      try {
+        const docRef = doc(db, "contacts", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setContact(docSnap.data());
+        } else {
+          toast.error("No such contact found");
+          navigate("/dashboard");
+        }
+      } catch (error) {
+        console.error("Error fetching contact: " + error);
+        toast.error("Error fetching contact data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchContact();
+  }, [id, navigate]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setContact({
+      ...contact,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const contactRef = doc(db, "contacts", id);
+      await updateDoc(contactRef, contact);
+      toast.success("Contact updated successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Error updating contact: " + error);
+      toast.error("Error updating contact");
+    }
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Navbar />
@@ -23,7 +87,7 @@ const EditContact = () => {
 
         <div className="bg-gray-800 rounded-xl shadow-xl border border-gray-700 overflow-hidden max-w-2xl mx-auto">
           <div className="p-8">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
                 <div>
                   <label
@@ -41,7 +105,8 @@ const EditContact = () => {
                       name="first_name"
                       id="first_name"
                       placeholder="Enter first name"
-                      value="Jhon"
+                      value={contact.first_name}
+                      onChange={handleInputChange}
                       required
                       className="w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                     />
@@ -63,7 +128,8 @@ const EditContact = () => {
                       name="last_name"
                       id="last_name"
                       placeholder="Enter last name"
-                      value="Doe"
+                      value={contact.last_name}
+                      onChange={handleInputChange}
                       required
                       className="w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                     />
@@ -87,7 +153,8 @@ const EditContact = () => {
                     name="email"
                     id="email"
                     placeholder="Enter your email"
-                    value="john.doe@example.com"
+                    value={contact.email}
+                    onChange={handleInputChange}
                     required
                     className="w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                   />
@@ -110,7 +177,8 @@ const EditContact = () => {
                     name="phone"
                     id="phone"
                     placeholder="Enter your phone number"
-                    value="+62 123456789"
+                    value={contact.phone}
+                    onChange={handleInputChange}
                     required
                     className="w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                   />

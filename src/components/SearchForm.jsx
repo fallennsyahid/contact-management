@@ -19,7 +19,7 @@ export default function SearchForm() {
   }, [isVisible]);
 
   return (
-    <div className="bg-gray-800/80 rounded-xl shadow-lg border border-gray-700 p-6 mb-8">
+    <div className="bg-gray-800/80 rounded-xl shadow-lg border border-gray-700 p-6 mb-8 animate-fade-in">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center">
           <i className="fa-solid fa-search text-blue-400 text-2xl mr-3"></i>

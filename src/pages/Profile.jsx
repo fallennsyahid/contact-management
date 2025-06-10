@@ -20,7 +20,7 @@ export default function Profile() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gray-800/80 border border-gray-700 rounded-xl shadow-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1">
+          <div className="bg-gray-800/80 border border-gray-700 rounded-xl shadow-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 animate-fade-in">
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-3 shadow-md">
@@ -69,7 +69,7 @@ export default function Profile() {
           </div>
 
           {/* Form 2: Password Edit */}
-          <div className="bg-gray-800/80 border border-gray-700 rounded-xl shadow-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1">
+          <div className="bg-gray-800/80 border border-gray-700 rounded-xl shadow-xl overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 animate-fade-in">
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center mr-3 shadow-md">
