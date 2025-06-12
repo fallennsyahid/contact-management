@@ -119,9 +119,6 @@ const DetailContact = () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <AddAddressCard />
-                <AddressListCard />
-                <AddressListCard />
-                <AddressListCard />
               </div>
             </div>
 

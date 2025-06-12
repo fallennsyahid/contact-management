@@ -1,7 +1,35 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 
-export default function SearchForm() {
+export default function SearchForm({ onSearch }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name.replace("search_", "")]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch(formData);
+  };
+
+  const handleReset = () => {
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+    });
+    onSearch({ name: "", email: "", phone: "" });
+  };
+
   const [isVisible, setIsVisible] = useState(false);
   const searchFormRef = useRef(null);
 
@@ -53,8 +81,8 @@ export default function SearchForm() {
             "max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin 0.3s ease-in-out",
         }}
       >
-        <form>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-2">
             <div>
               <label
                 htmlFor="search_name"
@@ -70,6 +98,8 @@ export default function SearchForm() {
                   type="text"
                   id="search_name"
                   name="search_name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Search by name"
                   className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 />
@@ -91,6 +121,8 @@ export default function SearchForm() {
                   type="email"
                   id="search_email"
                   name="search_email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Search by email"
                   className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 />
@@ -112,13 +144,23 @@ export default function SearchForm() {
                   type="text"
                   id="search_phone"
                   name="search_phone"
+                  value={formData.phone}
+                  onChange={handleChange}
                   placeholder="Search by name"
                   className="w-full pl-10 pr-3 py-3 bg-gray-700/50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 />
               </div>
             </div>
           </div>
-          <div className="mt-5 flex justify-end">
+          <div className="mt-5 flex justify-end mr-2 mb-2 gap-4">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="px-5 py-3 bg-gradient-to-r from-red-600 to-red-500 text-white text-lg rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-lg transform hover:-translate-y-0.5 flex items-center cursor-pointer"
+            >
+              <i className="fa-solid fa-rotate-left mr-2"></i>
+              Reset
+            </button>
             <Button
               type="submit"
               icon="fa-search"

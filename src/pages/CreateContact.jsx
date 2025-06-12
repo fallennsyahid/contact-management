@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../config/config";
+import { auth, db } from "../config/config";
 import toast from "react-hot-toast";
 import Button from "../components/Button";
 
@@ -23,7 +23,19 @@ const CreateContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addDoc(collection(db, "contacts"), form);
+      const user = auth.currentUser;
+      if (!user) {
+        toast.error("User not authenticated");
+        return;
+      }
+      // await addDoc(collection(db, "contacts"), form);
+
+      await addDoc(collection(db, "contacts"), {
+        ...form,
+        uid: user.uid,
+        createdAt: new Date(),
+      });
+
       toast.success("Add contact successfully");
       navigate("/dashboard");
     } catch (err) {

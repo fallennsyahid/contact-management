@@ -1,9 +1,38 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
+import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../config/config";
+import toast from "react-hot-toast";
 
 const AddAddress = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    street: "",
+    city: "",
+    province: "",
+    country: "",
+    postal_code: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addDoc(collection(db, "address"), form);
+      toast.success("Add address successfully!");
+      navigate("/detail-contact");
+    } catch (err) {
+      console.error("Failed to add address: " + err);
+      toast.error("Failed to add address");
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -39,7 +68,7 @@ const AddAddress = () => {
               </div>
             </div>
 
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-5">
                 <label
                   htmlFor="street"
@@ -56,6 +85,8 @@ const AddAddress = () => {
                     type="text"
                     name="street"
                     id="street"
+                    onChange={handleChange}
+                    value={form.street}
                     placeholder="Enter street address"
                     required
                     className="w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
@@ -80,6 +111,8 @@ const AddAddress = () => {
                       type="text"
                       name="city"
                       id="city"
+                      onChange={handleChange}
+                      value={form.city}
                       placeholder="Enter city"
                       required
                       className="w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
@@ -102,6 +135,8 @@ const AddAddress = () => {
                       type="text"
                       name="province"
                       id="province"
+                      onChange={handleChange}
+                      value={form.province}
                       placeholder="Enter province or state"
                       required
                       className="w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
@@ -127,6 +162,8 @@ const AddAddress = () => {
                       type="text"
                       name="country"
                       id="country"
+                      onChange={handleChange}
+                      value={form.country}
                       placeholder="Enter country"
                       required
                       className="w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
@@ -149,6 +186,8 @@ const AddAddress = () => {
                       type="text"
                       name="postal_code"
                       id="postal_code"
+                      onChange={handleChange}
+                      value={form.postal_code}
                       placeholder="Enter postal code"
                       required
                       className="w-full pl-10 pr-3 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"

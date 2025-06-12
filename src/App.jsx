@@ -28,9 +28,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" />} />
-
         <Route path="/dashboard" element={<Dashboard />} />
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
@@ -45,7 +43,6 @@ function App() {
 
         <Route path="/404" element={<NotFound404 />} />
         <Route path="/5xx" element={<ServerError5xx />} />
-
         <Route path="*" element={<NotFound404 />} />
       </Routes>
     </>
