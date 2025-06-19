@@ -1,8 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import AddAddressCard from "../components/AddAddressCard";
-import AddressListCard from "../components/AddressListCard";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/config";
@@ -112,7 +110,7 @@ const DetailContact = () => {
             </div>
 
             {/* Address Information Section */}
-            <div className="mb-8">
+            {/* <div className="mb-8">
               <div className="flex items-center mb-5">
                 <i className="fa-solid fa-map-marker-alt text-blue-400 mr-3"></i>
                 <h1 className="text-xl font-semibold text-white">Addresses</h1>
@@ -120,7 +118,7 @@ const DetailContact = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <AddAddressCard />
               </div>
-            </div>
+            </div> */}
 
             <div className="flex justify-end space-x-4">
               <Link

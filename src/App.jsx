@@ -9,8 +9,6 @@ import Profile from "./pages/Profile";
 import CreateContact from "./pages/CreateContact";
 import DetailContact from "./pages/DetailContact";
 import EditContact from "./pages/EditContact";
-import AddAddress from "./pages/AddAddress";
-import EditAddress from "./pages/EditAddress";
 import NotFound404 from "./pages/404";
 import ServerError5xx from "./pages/5xx";
 import { Toaster } from "react-hot-toast";
@@ -37,8 +35,6 @@ function App() {
           <Route path="/create-contact" element={<CreateContact />} />
           <Route path="/detail-contact/:id" element={<DetailContact />} />
           <Route path="/edit-contact/:id" element={<EditContact />} />
-          <Route path="/add-address" element={<AddAddress />} />
-          <Route path="/edit-address" element={<EditAddress />} />
         </Route>
 
         <Route path="/404" element={<NotFound404 />} />
